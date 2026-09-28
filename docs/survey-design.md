@@ -1,7 +1,7 @@
 # Survey Design — Lifestyle Habits and Metabolic Health Awareness
 
 **Form title:** Lifestyle Habits and Metabolic Health Awareness
-**Estimated time:** 3–4 minutes · 17 questions · target 50 responses (30+ usable)
+**Estimated time:** 3–4 minutes · 16 questions · target 50 responses (30+ usable)
 **Tool:** Google Forms
 
 ---
@@ -10,7 +10,7 @@
 
 Paste into the form description at the top:
 
-> This anonymous survey is part of an academic assignment for the Higher Diploma in Data Analytics at CCT College Dublin. It asks about everyday lifestyle habits (activity, sitting, sleep, diet) and awareness of metabolic health.
+> This anonymous survey is part of an academic assignment for the Higher Diploma in Data Analytics at CCT College Dublin. It asks about everyday lifestyle habits (activity, sitting, sleep, sugary drinks) and awareness of metabolic health.
 >
 > - The data is collected **for academic purposes only** and will not be used commercially or shared with third parties.
 > - **No names, email addresses or other identifying details are collected.** All responses are anonymised before analysis.
@@ -46,8 +46,7 @@ Paste into the form description at the top:
 | 6 | On a typical weekday, how many hours do you spend sitting (work, study, commuting, screens)? | Short answer | Number, 0–24, decimals allowed | `sitting_hours` | Continuous |
 | 7 | On average, how many hours do you sleep per night? | Short answer | Number, 2–14, decimals allowed | `sleep_hours` | Continuous |
 | 8 | How many sugary drinks (soft drinks, energy drinks, sweetened coffees) do you have per week? | Short answer | Number, whole, 0–100 | `sugary_drinks_week` | Integer |
-| 9 | How many takeaway or fast-food meals do you eat per week? | Short answer | Number, whole, 0–30 | `takeaways_week` | Integer |
-| 10 | Do you use a fitness tracker or smartwatch to monitor activity? | Multiple choice | Yes · No | `uses_tracker` | Boolean |
+| 9 | Do you use a fitness tracker or smartwatch to monitor activity? | Multiple choice | Yes · No | `uses_tracker` | Boolean |
 
 ### Section C — Body Measurements (Optional)
 
@@ -55,20 +54,20 @@ Paste into the form description at the top:
 
 | # | Question | Google Forms type | Options / validation | CSV column | Data type |
 |---|---|---|---|---|---|
-| 11 | What is your height in centimetres? (optional) | Short answer | Number, 120–220, not required | `height_cm` | Continuous |
-| 12 | Which range best describes your weight? (optional) | Multiple choice | Under 50 kg · 50–59 · 60–69 · 70–79 · 80–89 · 90–99 · 100–109 · 110 kg or more · Prefer not to say | `weight_band` | Categorical (ordinal) |
+| 10 | What is your height in centimetres? (optional) | Short answer | Number, 120–220, not required | `height_cm` | Continuous |
+| 11 | Which range best describes your weight? (optional) | Multiple choice | Under 50 kg · 50–59 · 60–69 · 70–79 · 80–89 · 90–99 · 100–109 · 110 kg or more · Prefer not to say | `weight_band` | Categorical (ordinal) |
 
 ### Section D — Health Awareness
 
 | # | Question | Google Forms type | Options / validation | CSV column | Data type |
 |---|---|---|---|---|---|
-| 13 | Before today, had you heard of "insulin resistance"? | Multiple choice | Yes · No | `heard_of_ir` | Boolean |
-| 14 | When did you last have a routine blood test? | Multiple choice | Within the last year · 1–2 years ago · More than 2 years ago · Never · Not sure | `last_blood_test` | Categorical |
-| 15 | How would you rate your overall health? | Linear scale | 1 (Very poor) – 5 (Excellent) | `self_rated_health` | Likert |
-| 16 | How concerned are you about developing type 2 diabetes in the future? | Linear scale | 1 (Not at all) – 5 (Very concerned) | `diabetes_concern` | Likert |
-| 17 | How likely would you be to use a free online tool that estimates your metabolic health risk from lifestyle questions? | Linear scale | 1 (Very unlikely) – 5 (Very likely) | `would_use_tool` | Likert |
+| 12 | Before today, had you heard of "insulin resistance"? | Multiple choice | Yes · No | `heard_of_ir` | Boolean |
+| 13 | When did you last have a routine blood test? | Multiple choice | Within the last year · 1–2 years ago · More than 2 years ago · Never · Not sure | `last_blood_test` | Categorical |
+| 14 | How would you rate your overall health? | Linear scale | 1 (Very poor) – 5 (Excellent) | `self_rated_health` | Likert |
+| 15 | How concerned are you about developing type 2 diabetes in the future? | Linear scale | 1 (Not at all) – 5 (Very concerned) | `diabetes_concern` | Likert |
+| 16 | How likely would you be to use a free online tool that estimates your metabolic health risk from lifestyle questions? | Linear scale | 1 (Very unlikely) – 5 (Very likely) | `would_use_tool` | Likert |
 
-**Data types covered:** Integer (6) · Continuous (3) · Categorical (5) · Likert (3) · Boolean (2). This meets the brief's minimum of 10 questions and 3 data types.
+**Data types covered:** Integer (5) · Continuous (3) · Categorical (5) · Likert (3) · Boolean (2). This meets the brief's minimum of 10 questions and 3 data types.
 
 ---
 
@@ -98,7 +97,7 @@ Paste into the form description at the top:
 ## 5. Google Forms Settings
 
 - **Settings → Responses:** Collect email addresses = **Off**; Limit to 1 response = **Off** (this would require sign-in)
-- **Required:** consent and Q1–Q10, Q13–Q17. **Optional:** Q11–Q12
+- **Required:** consent and Q1–Q9, Q12–Q16. **Optional:** Q10–Q11
 - Turn on **response validation** for every number question (see ranges above)
 - Link responses to a Google Sheet, then export as CSV
 
