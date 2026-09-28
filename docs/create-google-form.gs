@@ -148,6 +148,11 @@ function createSurvey() {
     ])
     .setRequired(false);
 
+  form.addMultipleChoiceItem()
+    .setTitle('Compared with 2 years ago, has your waist or trouser size increased? (optional)')
+    .setChoiceValues(['Yes', 'No', 'Not sure'])
+    .setRequired(false);
+
   // ---- Section D: Health awareness ---------------------------------------
   form.addPageBreakItem().setTitle('Health Awareness');
 

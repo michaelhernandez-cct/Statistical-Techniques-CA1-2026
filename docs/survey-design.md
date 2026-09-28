@@ -1,7 +1,7 @@
 # Survey Design — Lifestyle Habits and Metabolic Health Awareness
 
 **Form title:** Lifestyle Habits and Metabolic Health Awareness
-**Estimated time:** 3–4 minutes · 16 questions · target 50 responses (30+ usable)
+**Estimated time:** 3–4 minutes · 17 questions · target 50 responses (30+ usable)
 **Tool:** Google Forms
 
 ---
@@ -56,18 +56,21 @@ Paste into the form description at the top:
 |---|---|---|---|---|---|
 | 10 | What is your height in centimetres? (optional) | Short answer | Number, 120–220, not required | `height_cm` | Continuous |
 | 11 | Which range best describes your weight? (optional) | Multiple choice | Under 50 kg · 50–59 · 60–69 · 70–79 · 80–89 · 90–99 · 100–109 · 110 kg or more · Prefer not to say | `weight_band` | Categorical (ordinal) |
+| 12 | Compared with 2 years ago, has your waist or trouser size increased? (optional) | Multiple choice | Yes · No · Not sure | `waist_increased` | Categorical |
+
+*Why Q12 and not a waist measurement: waist circumference is a stronger marker of central adiposity than BMI, but self-reported waist values are unreliable (most people give trouser size, which sits lower). A change question is easy to answer honestly and still captures central weight gain.*
 
 ### Section D — Health Awareness
 
 | # | Question | Google Forms type | Options / validation | CSV column | Data type |
 |---|---|---|---|---|---|
-| 12 | Before today, had you heard of "insulin resistance"? | Multiple choice | Yes · No | `heard_of_ir` | Boolean |
-| 13 | When did you last have a routine blood test? | Multiple choice | Within the last year · 1–2 years ago · More than 2 years ago · Never · Not sure | `last_blood_test` | Categorical |
-| 14 | How would you rate your overall health? | Linear scale | 1 (Very poor) – 5 (Excellent) | `self_rated_health` | Likert |
-| 15 | How concerned are you about developing type 2 diabetes in the future? | Linear scale | 1 (Not at all) – 5 (Very concerned) | `diabetes_concern` | Likert |
-| 16 | How likely would you be to use a free online tool that estimates your metabolic health risk from lifestyle questions? | Linear scale | 1 (Very unlikely) – 5 (Very likely) | `would_use_tool` | Likert |
+| 13 | Before today, had you heard of "insulin resistance"? | Multiple choice | Yes · No | `heard_of_ir` | Boolean |
+| 14 | When did you last have a routine blood test? | Multiple choice | Within the last year · 1–2 years ago · More than 2 years ago · Never · Not sure | `last_blood_test` | Categorical |
+| 15 | How would you rate your overall health? | Linear scale | 1 (Very poor) – 5 (Excellent) | `self_rated_health` | Likert |
+| 16 | How concerned are you about developing type 2 diabetes in the future? | Linear scale | 1 (Not at all) – 5 (Very concerned) | `diabetes_concern` | Likert |
+| 17 | How likely would you be to use a free online tool that estimates your metabolic health risk from lifestyle questions? | Linear scale | 1 (Very unlikely) – 5 (Very likely) | `would_use_tool` | Likert |
 
-**Data types covered:** Integer (5) · Continuous (3) · Categorical (5) · Likert (3) · Boolean (2). This meets the brief's minimum of 10 questions and 3 data types.
+**Data types covered:** Integer (5) · Continuous (3) · Categorical (6) · Likert (3) · Boolean (2). This meets the brief's minimum of 10 questions and 3 data types.
 
 ---
 
@@ -90,14 +93,14 @@ Paste into the form description at the top:
 | **2. Visualisations (30)** | ① Histogram of weekly activity ② Histogram of sleep with normal curve ③ Q-Q plot of sleep ④ Box plot of sitting hours by occupation ⑤ Box plot of activity by tracker use ⑥ Bar chart of Likert responses ⑦ Scatter plot of sitting vs activity ⑧ Correlation heatmap ⑨ Count plot of awareness by blood-test recency | Mixed |
 | **3. Outliers (10)** | IQR and z-score detection on activity and sitting; compare mean, SD and skew with vs without outliers; 95% confidence intervals for mean sleep and activity; bootstrap resampling | `weekly_activity_min`, `sitting_hours`, `sleep_hours` |
 | **4. Inferential (15)** | **Bayes:** prior P(meets WHO) → posterior P(meets WHO \| uses tracker). **Normal distribution:** z-score sleep, P(sleep < 7 h) with `scipy.stats.norm.cdf`, compare P(sleep < 7 \| sitting > 8 h) with the empirical proportion | `meets_who`, `uses_tracker`, `sleep_hours`, `sitting_hours` |
-| **5. Correlation / Chi-square (15)** | Pearson and Spearman correlation of numeric features vs `weekly_activity_min`; chi-square: `meets_who` × `occupation`, `meets_who` × `uses_tracker`, `heard_of_ir` × `last_blood_test` | Features vs target |
+| **5. Correlation / Chi-square (15)** | Pearson and Spearman correlation of numeric features vs `weekly_activity_min`; chi-square: `meets_who` × `occupation`, `meets_who` × `uses_tracker`, `heard_of_ir` × `last_blood_test`, `waist_increased` × `meets_who` | Features vs target |
 
 ---
 
 ## 5. Google Forms Settings
 
 - **Settings → Responses:** Collect email addresses = **Off**; Limit to 1 response = **Off** (this would require sign-in)
-- **Required:** consent and Q1–Q9, Q12–Q16. **Optional:** Q10–Q11
+- **Required:** consent and Q1–Q9, Q13–Q17. **Optional:** Q10–Q12
 - Turn on **response validation** for every number question (see ranges above)
 - Link responses to a Google Sheet, then export as CSV
 
@@ -106,7 +109,7 @@ Paste into the form description at the top:
 - [ ] Drop the `Timestamp` and consent columns
 - [ ] Rename columns to the CSV names above
 - [ ] Encode Yes/No → `True`/`False`
-- [ ] Convert "Prefer not to say" → missing (NaN)
+- [ ] Convert "Prefer not to say" and skipped optional answers → missing (NaN); keep "Not sure" as its own category in Q12
 - [ ] Check for impossible values (e.g. active minutes > 600, sleep + sitting > 24)
 - [ ] Commit only the anonymised `Data_CA1.csv`, never the raw export
 
