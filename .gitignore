@@ -5,3 +5,6 @@ __pycache__/
 .env
 CLAUDE.md
 ~$*.docx
+
+# raw survey export (has timestamps), only the anonymised data/Data_CA1.csv is committed
+docs/*Responses*.csv
